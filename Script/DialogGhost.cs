@@ -12,12 +12,13 @@ public class DialogGhost : MonoBehaviour
     public string answerText2;
     public string answerText3;
     public string answerText4;
+    public int correctAnswer;
 
     public LayerMask playerLayer;
     public float radious;
 
     private DialogControl dc;
-    private bool onRadious;
+    private bool onRadious = true;
     private float originalRadious;
     private bool isCoroutineRunning = false;
 
@@ -36,7 +37,7 @@ public class DialogGhost : MonoBehaviour
     {
         if (onRadious)
         {
-            dc.Speak(profile, speakTxt, actorName, answerText1, answerText2, answerText3, answerText4);
+            dc.Speak(profile, speakTxt, actorName, answerText1, answerText2, answerText3, answerText4, correctAnswer);
             onRadious = false;
         }
     }

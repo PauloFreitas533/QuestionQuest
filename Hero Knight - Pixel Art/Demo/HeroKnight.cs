@@ -220,7 +220,7 @@ public class HeroKnight : MonoBehaviour
         }
     }
 
-    private void Damage()
+    public void Damage()
     {
         life -= 1;
 
