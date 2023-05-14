@@ -224,6 +224,12 @@ public class HeroKnight : MonoBehaviour
             lastHitTime = Time.time;
             this.Damage();
         }
+
+        if (col.gameObject.CompareTag("saw") && Time.time > lastHitTime + hitRecoveryTime)
+        {
+            lastHitTime = Time.time;
+            this.Damage();
+        }
     }
 
     public void Damage()
