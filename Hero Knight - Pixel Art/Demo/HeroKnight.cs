@@ -12,8 +12,8 @@ public class HeroKnight : MonoBehaviour
     [SerializeField] float m_rollForce = 6.0f;
     [SerializeField] bool m_noBlood = false;
     [SerializeField] GameObject m_slideDust;
-    [SerializeField] Image lifeOn;
-    [SerializeField] Image lifeOff;
+    [SerializeField] Image lifeOn1;
+    [SerializeField] Image lifeOff1;
     [SerializeField] Image lifeOn2;
     [SerializeField] Image lifeOff2;
     [SerializeField] Image lifeOn3;
@@ -39,9 +39,15 @@ public class HeroKnight : MonoBehaviour
     private int lifeMax = 3;
     private bool isDeath = false;
     private Rigidbody2D rb;
+    public Text keyTxt;
+    public GameObject keyPrefab;
+    public bool keyHas;
+    public bool heartHas;
     public AudioSource hurtAudio, deathAudioSource;
     public float hitRecoveryTime = 1.0f;
     private float lastHitTime = -999f;
+    public int key;
+    private bool heartCollected = false;
 
     // Use this for initialization
     void Start()
@@ -55,11 +61,16 @@ public class HeroKnight : MonoBehaviour
         m_wallSensorL2 = transform.Find("WallSensor_L2").GetComponent<Sensor_HeroKnight>();
         life = lifeMax;
         rb = GetComponent<Rigidbody2D>();
+        key = 0;
+        keyHas = false;
+        heartHas = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        keyTxt.text = key.ToString();
+
         // Increase timer that controls attack combo
         m_timeSinceAttack += Time.deltaTime;
 
@@ -189,6 +200,14 @@ public class HeroKnight : MonoBehaviour
             if (m_delayToIdle < 0)
                 m_animator.SetInteger("AnimState", 0);
         }
+
+        if (gameObject.CompareTag("chestgold"))
+        {
+            Debug.Log("chestgold");
+            m_animator.SetTrigger("chestgold");
+            //keyPrefab.gameObject.SetActive(true);
+            //col.gameObject.GetComponent<Collider2D>().enabled = false;
+        }
     }
 
     // Animation Events
@@ -230,6 +249,44 @@ public class HeroKnight : MonoBehaviour
             lastHitTime = Time.time;
             this.Damage();
         }
+
+            if (col.gameObject.CompareTag("key"))
+        {
+            key = key + 1;
+            keyHas = true;
+            Destroy(col.gameObject);
+        }
+
+        if (col.gameObject.CompareTag("heart") && !heartCollected)
+        {
+            heartCollected = true;
+            Destroy(col.gameObject);
+            if (life < lifeMax)
+            {
+                life++;
+                switch (life)
+                {
+                    case 2:
+                        lifeOn3.enabled = true;
+                        lifeOff3.enabled = false;
+                        lifeOn2.enabled = false;
+                        lifeOff2.enabled = true;
+                        lifeOn1.enabled = false;
+                        lifeOff1.enabled = true;
+                        break;
+                    case 3:
+                        lifeOn3.enabled = false;
+                        lifeOff3.enabled = true;
+                        lifeOn2.enabled = false;
+                        lifeOff2.enabled = true;
+                        lifeOn1.enabled = false;
+                        lifeOff1.enabled = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 
     public void Damage()
@@ -241,22 +298,22 @@ public class HeroKnight : MonoBehaviour
             case 2:
                 m_animator.SetTrigger("Hurt");
                 hurtAudio.Play();
-                lifeOn3.enabled = false;
-                lifeOff3.enabled = true;
-                lifeOn2.enabled = true;
-                lifeOff2.enabled = false;
-                lifeOn.enabled = false;
-                lifeOff.enabled = true;
+                lifeOn3.enabled = true;
+                lifeOff3.enabled = false;
+                lifeOn2.enabled = false;
+                lifeOff2.enabled = true;
+                lifeOn1.enabled = false;
+                lifeOff1.enabled = true;
                 break;
             case 1:
                 m_animator.SetTrigger("Hurt");
                 hurtAudio.Play();
-                lifeOn3.enabled = false;
-                lifeOff3.enabled = true;
+                lifeOn3.enabled = true;
+                lifeOff3.enabled = false;
                 lifeOn2.enabled = true;
                 lifeOff2.enabled = false;
-                lifeOn.enabled = true;
-                lifeOff.enabled = false;
+                lifeOn1.enabled = false;
+                lifeOff1.enabled = true;
                 break;
             case 0:
                 m_animator.SetTrigger("Death");
@@ -265,14 +322,15 @@ public class HeroKnight : MonoBehaviour
                 lifeOff3.enabled = false;
                 lifeOn2.enabled = true;
                 lifeOff2.enabled = false;
-                lifeOn.enabled = true;
-                lifeOff.enabled = false;
+                lifeOn1.enabled = true;
+                lifeOff1.enabled = false;
                 isDeath = true;
                 Invoke("LoadGameOverScene", 2.5f);
                 break;
             default:
                 break;
         }
+        heartCollected = false;
     }
 
     private void LoadGameOverScene()
