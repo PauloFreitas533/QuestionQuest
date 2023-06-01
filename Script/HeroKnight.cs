@@ -12,12 +12,14 @@ public class HeroKnight : MonoBehaviour
     [SerializeField] float m_rollForce = 6.0f;
     [SerializeField] bool m_noBlood = false;
     [SerializeField] GameObject m_slideDust;
-    [SerializeField] Image lifeOn1;
-    [SerializeField] Image lifeOff1;
-    [SerializeField] Image lifeOn2;
-    [SerializeField] Image lifeOff2;
-    [SerializeField] Image lifeOn3;
-    [SerializeField] Image lifeOff3;
+    [SerializeField] public Image lifeOn1;
+    [SerializeField] public Image lifeOff1;
+    [SerializeField] public Image lifeOn2;
+    [SerializeField] public Image lifeOff2;
+    [SerializeField] public Image lifeOn3;
+    [SerializeField] public Image lifeOff3;
+    [SerializeField] 
+    public MovementDirection movementDirection;
 
     private Animator m_animator;
     private Rigidbody2D m_body2d;
@@ -35,8 +37,8 @@ public class HeroKnight : MonoBehaviour
     private float m_delayToIdle = 0.0f;
     private float m_rollDuration = 8.0f / 14.0f;
     private float m_rollCurrentTime;
-    private int life;
-    private int lifeMax = 3;
+    public int life;
+    public int lifeMax = 3;
     private bool isDeath = false;
     private Rigidbody2D rb;
     public Text keyTxt;
@@ -47,7 +49,7 @@ public class HeroKnight : MonoBehaviour
     public float hitRecoveryTime = 1.0f;
     private float lastHitTime = -999f;
     public int key;
-    private bool heartCollected = false;
+    public bool heartCollected = false;
 
     // Use this for initialization
     void Start()
@@ -64,11 +66,23 @@ public class HeroKnight : MonoBehaviour
         key = 0;
         keyHas = false;
         heartHas = false;
+	  this.movementDirection = MovementDirection.Right;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        float moveX = Input.GetAxis("Horizontal");
+
+        if (moveX > 0 )
+        {
+            this.movementDirection = MovementDirection.Right;
+        }
+        else if (moveX < 0)
+        {
+            this.movementDirection = MovementDirection.Left;
+        }
         keyTxt.text = key.ToString();
 
         // Increase timer that controls attack combo
@@ -166,12 +180,10 @@ public class HeroKnight : MonoBehaviour
             m_animator.SetBool("IdleBlock", false);
 
         // Roll
-        else if (Input.GetKeyDown("left shift") && !m_rolling && !m_isWallSliding && !isDeath)
-        {
-            m_rolling = true;
-            m_animator.SetTrigger("Roll");
-            m_body2d.velocity = new Vector2(m_facingDirection * m_rollForce, m_body2d.velocity.y);
-        }
+        else if (Input.GetKeyDown(KeyCode.LeftShift) && !m_rolling && !m_isWallSliding && !isDeath)
+{
+    StartCoroutine(RollForDuration(0.6f));
+}
 
 
         //Jump
@@ -210,6 +222,32 @@ public class HeroKnight : MonoBehaviour
         }
     }
 
+private IEnumerator RollForDuration(float duration)
+{
+    // Salvar os valores originais do Box Collider
+    BoxCollider2D boxCollider2D = GetComponent<BoxCollider2D>();
+    Vector2 originalOffset = boxCollider2D.offset;
+    Vector2 originalSize = boxCollider2D.size;
+
+    // Definir os novos valores do Box Collider
+    boxCollider2D.offset = new Vector2(originalOffset.x, 0.3678495f);
+    boxCollider2D.size = new Vector2(originalSize.x, 0.6116992f);
+
+    m_animator.SetTrigger("Roll");
+    m_body2d.velocity = new Vector2(m_facingDirection * m_rollForce, m_body2d.velocity.y);
+
+    // Aguardar o tempo de duração
+    yield return new WaitForSeconds(duration);
+
+    // Restaurar os valores originais do Box Collider
+    boxCollider2D.offset = originalOffset;
+    boxCollider2D.size = originalSize;
+
+    // Reiniciar o rolo
+    m_rolling = false;
+    m_animator.ResetTrigger("Roll");
+}
+
     // Animation Events
     // Called in slide animation.
     void AE_SlideDust()
@@ -238,18 +276,6 @@ public class HeroKnight : MonoBehaviour
             this.Damage();
         }
 
-        if (col.gameObject.CompareTag("pendulum") && Time.time > lastHitTime + hitRecoveryTime)
-        {
-            lastHitTime = Time.time;
-            this.Damage();
-        }
-
-        if (col.gameObject.CompareTag("saw") && Time.time > lastHitTime + hitRecoveryTime)
-        {
-            lastHitTime = Time.time;
-            this.Damage();
-        }
-
             if (col.gameObject.CompareTag("key"))
         {
             key = key + 1;
@@ -257,36 +283,6 @@ public class HeroKnight : MonoBehaviour
             Destroy(col.gameObject);
         }
 
-        if (col.gameObject.CompareTag("heart") && !heartCollected)
-        {
-            heartCollected = true;
-            Destroy(col.gameObject);
-            if (life < lifeMax)
-            {
-                life++;
-                switch (life)
-                {
-                    case 2:
-                        lifeOn3.enabled = true;
-                        lifeOff3.enabled = false;
-                        lifeOn2.enabled = false;
-                        lifeOff2.enabled = true;
-                        lifeOn1.enabled = false;
-                        lifeOff1.enabled = true;
-                        break;
-                    case 3:
-                        lifeOn3.enabled = false;
-                        lifeOff3.enabled = true;
-                        lifeOn2.enabled = false;
-                        lifeOff2.enabled = true;
-                        lifeOn1.enabled = false;
-                        lifeOff1.enabled = true;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
     }
 
     public void Damage()
