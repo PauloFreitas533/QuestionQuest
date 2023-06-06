@@ -9,8 +9,11 @@ public class Boss : MonoBehaviour
     private Animator animator;
     public float minYPosition = -24f;
     private bool isExhausted = false;
-    private bool isClose = true;
+    private bool isDistant = true;
     private int tentativas;
+    public Collider2D leftCollider;
+    public Collider2D rightCollider;
+    private bool isColliding = false;
 
     private void Start()
     {
@@ -25,16 +28,25 @@ public class Boss : MonoBehaviour
             Vector3 direction = target.position - transform.position;
             direction.Normalize();
             transform.position += direction * moveSpeed * Time.deltaTime;
+       	    float distance = Vector2.Distance(transform.position, target.position); // Verifica a distância entre o Boss e o jogador
 
             if (target.position.x < transform.position.x)
             {
                 float currentScaleX = Mathf.Abs(transform.localScale.x);
                 transform.localScale = new Vector3(-currentScaleX, transform.localScale.y, transform.localScale.z);
+		if (distance < 4f && isDistant)
+                {
+                    OnTriggerEnter2D(leftCollider);
+                } 
             }
             else
             {
                 float currentScaleX = Mathf.Abs(transform.localScale.x);
                 transform.localScale = new Vector3(currentScaleX, transform.localScale.y, transform.localScale.z);
+		if (distance < 4f && isDistant)
+                {
+                    OnTriggerEnter2D(rightCollider);
+                }
             }
 
             // Limitar posição Y
@@ -42,16 +54,22 @@ public class Boss : MonoBehaviour
             {
                 transform.position = new Vector3(transform.position.x, minYPosition, transform.position.z);
             }
+        }
+    }
 
-            // Verifica a distância entre o Boss e o jogador
-            float distance = Vector2.Distance(transform.position, target.position);
-            if (distance < 4f && isClose)
+    // Função chamada pela animação para reiniciar o estado de ataque
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && !isColliding)
+        {
+            HeroKnight heroKnight = collision.GetComponent<HeroKnight>();
+            if (heroKnight != null)
             {
-                // Inicia a animação de ataque
-                animator.SetTrigger("Attack");
-		    tentativas = tentativas + 1;
-		    isClose = false;
-   		    StartCoroutine(ResetDistance());
+		animator.SetTrigger("Attack");
+		tentativas = tentativas + 1;
+		isDistant = false;
+		isColliding = true;
+		StartCoroutine(ResetDistance());
             }
         }
     }
@@ -63,12 +81,12 @@ public class Boss : MonoBehaviour
 	  if(tentativas == 3)
 	  {
 	     StartCoroutine(ResetExhaustedState());
-        }    
+          }
     }
 
     private IEnumerator ResetExhaustedState()
     {
-	  isExhausted = true;
+	isExhausted = true;
         yield return new WaitForSeconds(3f);
         isExhausted = false;
         tentativas = 0;
@@ -77,7 +95,9 @@ public class Boss : MonoBehaviour
     private IEnumerator ResetDistance()
     {
         yield return new WaitForSeconds(5f);
-        isClose = true;
+        isDistant = true;
+	GetComponent<Collider2D>().enabled = true;
+        isColliding = false;
     }
 }
 

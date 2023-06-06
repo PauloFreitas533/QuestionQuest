@@ -10,6 +10,8 @@ public class EnemyTakeDamageSystem : MonoBehaviour
     [SerializeField]
     private EnemyLifeBar enemyLifeBar;
 
+    private bool isColliding = false;
+
     private void Start()
     {
         this.enemyLifeBar.MaxLife = this.life--;
@@ -37,13 +39,22 @@ public class EnemyTakeDamageSystem : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private IEnumerator ReactivateCollider(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        GetComponent<Collider2D>().enabled = true;
+        isColliding = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !isColliding)
         {
             HeroKnight heroKnight = collision.GetComponent<HeroKnight>();
             if (heroKnight != null)
             {
+		isColliding = true;
+		StartCoroutine(ReactivateCollider(1f));
                 heroKnight.Damage();
             }
         }

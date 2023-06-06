@@ -18,6 +18,10 @@ public class HeroKnight : MonoBehaviour
     [SerializeField] public Image lifeOff2;
     [SerializeField] public Image lifeOn3;
     [SerializeField] public Image lifeOff3;
+    [SerializeField] public Image lifeOn4;
+    [SerializeField] public Image lifeOff4;
+    [SerializeField] public Image lifeOn5;
+    [SerializeField] public Image lifeOff5;
     [SerializeField] 
     public MovementDirection movementDirection;
 
@@ -50,6 +54,7 @@ public class HeroKnight : MonoBehaviour
     private float lastHitTime = -999f;
     public int key;
     public bool heartCollected = false;
+    private bool isItRolling = false;
 
     // Use this for initialization
     void Start()
@@ -180,10 +185,11 @@ public class HeroKnight : MonoBehaviour
             m_animator.SetBool("IdleBlock", false);
 
         // Roll
-        else if (Input.GetKeyDown(KeyCode.LeftShift) && !m_rolling && !m_isWallSliding && !isDeath)
-{
-    StartCoroutine(RollForDuration(0.6f));
-}
+        else if (Input.GetKeyDown(KeyCode.LeftShift) && !m_rolling && !m_isWallSliding && !isDeath && !isItRolling)
+	  {
+  		isItRolling = true;
+    	      StartCoroutine(RollForDuration(0.6f));
+	  }
 
 
         //Jump
@@ -235,16 +241,15 @@ private IEnumerator RollForDuration(float duration)
 
     m_animator.SetTrigger("Roll");
     m_body2d.velocity = new Vector2(m_facingDirection * m_rollForce, m_body2d.velocity.y);
-
     // Aguardar o tempo de duração
     yield return new WaitForSeconds(duration);
-
     // Restaurar os valores originais do Box Collider
     boxCollider2D.offset = originalOffset;
     boxCollider2D.size = originalSize;
 
     // Reiniciar o rolo
     m_rolling = false;
+    isItRolling = false;
     m_animator.ResetTrigger("Roll");
 }
 
@@ -291,9 +296,41 @@ private IEnumerator RollForDuration(float duration)
 
         switch (life)
         {
+            case 4:
+                m_animator.SetTrigger("Hurt");
+                hurtAudio.Play();
+                lifeOn5.enabled = true;
+                lifeOff5.enabled = false;
+                lifeOn4.enabled = false;
+                lifeOff4.enabled = true;
+                lifeOn3.enabled = false;
+                lifeOff3.enabled = true;
+                lifeOn2.enabled = false;
+                lifeOff2.enabled = true;
+                lifeOn1.enabled = false;
+                lifeOff1.enabled = true;
+                break;
+            case 3:
+                m_animator.SetTrigger("Hurt");
+                hurtAudio.Play();
+                lifeOn5.enabled = true;
+                lifeOff5.enabled = false;
+                lifeOn4.enabled = true;
+                lifeOff4.enabled = false;
+                lifeOn3.enabled = false;
+                lifeOff3.enabled = true;
+                lifeOn2.enabled = false;
+                lifeOff2.enabled = true;
+                lifeOn1.enabled = false;
+                lifeOff1.enabled = true;
+                break;
             case 2:
                 m_animator.SetTrigger("Hurt");
                 hurtAudio.Play();
+                lifeOn5.enabled = true;
+                lifeOff5.enabled = false;
+                lifeOn4.enabled = true;
+                lifeOff4.enabled = false;
                 lifeOn3.enabled = true;
                 lifeOff3.enabled = false;
                 lifeOn2.enabled = false;
@@ -304,6 +341,10 @@ private IEnumerator RollForDuration(float duration)
             case 1:
                 m_animator.SetTrigger("Hurt");
                 hurtAudio.Play();
+                lifeOn5.enabled = true;
+                lifeOff5.enabled = false;
+                lifeOn4.enabled = true;
+                lifeOff4.enabled = false;
                 lifeOn3.enabled = true;
                 lifeOff3.enabled = false;
                 lifeOn2.enabled = true;
@@ -314,6 +355,10 @@ private IEnumerator RollForDuration(float duration)
             case 0:
                 m_animator.SetTrigger("Death");
                 deathAudioSource.Play();
+                lifeOn5.enabled = true;
+                lifeOff5.enabled = false;
+                lifeOn4.enabled = true;
+                lifeOff4.enabled = false;
                 lifeOn3.enabled = true;
                 lifeOff3.enabled = false;
                 lifeOn2.enabled = true;
