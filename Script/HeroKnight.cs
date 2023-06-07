@@ -42,7 +42,7 @@ public class HeroKnight : MonoBehaviour
     private float m_rollDuration = 8.0f / 14.0f;
     private float m_rollCurrentTime;
     public int life;
-    public int lifeMax = 3;
+    public int lifeMax = 5;
     private bool isDeath = false;
     private Rigidbody2D rb;
     public Text keyTxt;
