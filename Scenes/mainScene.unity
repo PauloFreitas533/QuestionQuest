@@ -950,19 +950,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 271158154}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 919063140}
-        m_TargetAssemblyTypeName: DialogControl, Assembly-CSharp
-        m_MethodName: AnswerButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &271158154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1119,7 +1107,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -4.025}
+  m_AnchoredPosition: {x: 0, y: -4.0249996}
   m_SizeDelta: {x: 0, y: -8.05}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &293935082
@@ -2269,19 +2257,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 674716010}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 919063140}
-        m_TargetAssemblyTypeName: DialogControl, Assembly-CSharp
-        m_MethodName: AnswerButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &674716010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2475,8 +2451,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710277094}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.000014293948}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2493,7 +2469,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5, y: 0}
+  m_AnchoredPosition: {x: 5, y: -0.00012207031}
   m_SizeDelta: {x: 680, y: 475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &710277096
@@ -2546,13 +2522,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebee11dab0bfea4a98dc79cba75613e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogGhost: {fileID: 0}
   index:
   - {fileID: 1941571840}
   - {fileID: 1073542270}
   - {fileID: 271158153}
   - {fileID: 674716009}
-  dialogObj: {fileID: 0}
+  dialogObj: {fileID: 710277094}
   profile: {fileID: 0}
   speakText: {fileID: 0}
   actorNameText: {fileID: 0}
@@ -2639,6 +2614,62 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3568800263663788372, guid: 6c0060b77d1e0014692512da5fe731f4, type: 3}
   m_PrefabInstance: {fileID: 756285248}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &783321165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 783321167}
+  - component: {fileID: 783321166}
+  m_Layer: 0
+  m_Name: Question2
+  m_TagString: question2
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &783321166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783321165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552d707e768007b42abe82f02676894f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: -7008412969330441016, guid: d6b8c791d8089b44a9a8c5a7423bd180, type: 3}
+  speakTxt: Pior seria se pior fosse?
+  actorName: "Pica de a\xE7o"
+  answerText1: Errado
+  answerText2: Certo
+  answerText3: Errado
+  answerText4: Errado
+  correctAnswer: 1
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  radious: 0
+--- !u!4 &783321167
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783321165}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -52.78, y: 6.32, z: -0.37431878}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &796031418 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5652095059959603027, guid: bdefe03bc35a22a4d8085fe68bc88462, type: 3}
@@ -2746,7 +2777,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebee11dab0bfea4a98dc79cba75613e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogGhost: {fileID: 0}
   index:
   - {fileID: 1941571840}
   - {fileID: 1073542270}
@@ -2866,8 +2896,8 @@ GameObject:
   - component: {fileID: 938620064}
   - component: {fileID: 938620062}
   m_Layer: 0
-  m_Name: FirstQuestion
-  m_TagString: Untagged
+  m_Name: Question1
+  m_TagString: enimyGhost1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2886,7 +2916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   profile: {fileID: -7008412969330441016, guid: d6b8c791d8089b44a9a8c5a7423bd180, type: 3}
   speakTxt: "Qual o simbolo \xE9 usado para atribuir um valor \"int\" a uma vari\xE1vel?"
-  actorName: Ghost
+  actorName: Pica Murcha
   answerText1: Resposta errada
   answerText2: Resposta errada
   answerText3: Resposta errada
@@ -3659,19 +3689,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1073542271}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 919063140}
-        m_TargetAssemblyTypeName: DialogControl, Assembly-CSharp
-        m_MethodName: AnswerButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1073542271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35131,8 +35149,8 @@ Canvas:
   m_GameObject: {fileID: 1389366183}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 2144174375}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -35141,7 +35159,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 19
   m_TargetDisplay: 0
 --- !u!224 &1389366187
 RectTransform:
@@ -37814,19 +37832,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1941571841}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 919063140}
-        m_TargetAssemblyTypeName: DialogControl, Assembly-CSharp
-        m_MethodName: AnswerButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1941571841
 MonoBehaviour:
   m_ObjectHideFlags: 0

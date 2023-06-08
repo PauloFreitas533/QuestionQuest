@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class DialogControl : MonoBehaviour
 {
     private HeroKnight hero;
-    public DialogGhost dialogGhost;
+    private DialogGhost dialogGhost;
+    private Question2 question2;
     public Button[] index = new Button[4];
 
     [Header("Components")]
@@ -34,10 +35,11 @@ public class DialogControl : MonoBehaviour
     {
         hero = FindObjectOfType<HeroKnight>();
         dialogGhost = FindObjectOfType<DialogGhost>();
+        question2 = FindObjectOfType<Question2>();
     }
 
     public void Speak(Sprite p, string txt, string actorName, string answer1, 
-        string answer2, string answer3, string answer4, int correctIntAnswer)
+        string answer2, string answer3, string answer4, int correctIntAnswer, string dialogOption)
     {
         dialogObj.SetActive(true);
         profile.sprite = p;
@@ -48,37 +50,8 @@ public class DialogControl : MonoBehaviour
         answerText3.text = answer3;
         answerText4.text = answer4;
         correctAnswer = correctIntAnswer;
-        ShowDialog();
-        //StartCoroutine(TypeSentence());
+        ShowDialog(dialogOption);
     }
-
-    //IEnumerator TypeSentence()
-    //{
-    //    foreach (char letter in sentences[index].ToCharArray())
-    //    {
-    //        speakText.text += letter;
-    //        yield return new WaitForSeconds(typingSpeed);
-    //    }
-    //}
-
-    //public void NextSentence()
-    //{
-    //    if(speakText.text == sentences[index])
-    //    {
-    //        if(index < sentences.Length - 1)
-    //        {
-    //            index++;
-    //            speakText.text = "";
-    //            StartCoroutine(TypeSentence());
-    //        }
-    //        else
-    //        {
-    //            speakText.text = "";
-    //            index = 0;
-    //            dialogObj.SetActive(false);
-    //        }
-    //    }
-    //}
 
     public void Escape()
     {
@@ -86,24 +59,32 @@ public class DialogControl : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void ShowDialog()
+    public void ShowDialog(string dialogOption)
     {
         index[0].onClick.RemoveAllListeners();
         index[1].onClick.RemoveAllListeners();
         index[2].onClick.RemoveAllListeners();
         index[3].onClick.RemoveAllListeners();
 
-        index[0].onClick.AddListener(() => AnswerButton(0));
-        index[1].onClick.AddListener(() => AnswerButton(1));
-        index[2].onClick.AddListener(() => AnswerButton(2));
-        index[3].onClick.AddListener(() => AnswerButton(3));
+        index[0].onClick.AddListener(() => AnswerButton(0, dialogOption));
+        index[1].onClick.AddListener(() => AnswerButton(1, dialogOption));
+        index[2].onClick.AddListener(() => AnswerButton(2, dialogOption));
+        index[3].onClick.AddListener(() => AnswerButton(3, dialogOption));
     }
 
-    public void AnswerButton(int buttonIndex)
+    public void AnswerButton(int buttonIndex, string dialogOption)
     {
         if (buttonIndex == correctAnswer)
         {
-            dialogGhost.gameObject.SetActive(false);
+            if (dialogOption == "ghost")
+            {
+                dialogGhost.gameObject.SetActive(false);
+            }
+            else if (dialogOption == "question2")
+            {
+                question2.gameObject.SetActive(false);
+            }
+            // Handle other dialog options here
         }
         else
         {

@@ -55,12 +55,6 @@ public class PauseMenu : MonoBehaviour
         #endif
     }
 
-    public void RestartGame(string scene)
-    {
-        OnClickButton();
-        SceneManager.LoadScene(scene);
-    }
-
     public void OnClickButton()
     {
         audioSource.PlayOneShot(buttonAudio);
