@@ -21,15 +21,27 @@ public class PendulumTrap : MonoBehaviour
 
     public void Push()
     {
-        if(transform.rotation.z > 0 && transform.rotation.z < rangerRight && (pendulumRB.angularVelocity > 0) 
+        if (transform.rotation.z > 0 && transform.rotation.z < rangerRight && (pendulumRB.angularVelocity > 0) 
             && pendulumRB.angularVelocity < limitSpeed)
         {
             pendulumRB.angularVelocity = limitSpeed;
         }
-        else if(transform.rotation.z < 0 && transform.rotation.z > rangerRight && (pendulumRB.angularVelocity < 0)
+        else if (transform.rotation.z < 0 && transform.rotation.z > rangerRight && (pendulumRB.angularVelocity < 0)
             && pendulumRB.angularVelocity > limitSpeed * -1)
         {
             pendulumRB.angularVelocity = limitSpeed;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            HeroKnight heroKnight = collision.GetComponent<HeroKnight>();
+            if (heroKnight != null)
+            {
+                heroKnight.Damage();
+            }
         }
     }
 }

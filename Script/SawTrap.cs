@@ -50,13 +50,17 @@ public class SawTrap : MonoBehaviour
         isColliding = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !isColliding)
+        if (collision.CompareTag("Player") && !isColliding)
         {
-            isColliding = true;
-            GetComponent<Collider2D>().enabled = false;
-            StartCoroutine(ReactivateCollider(0.5f));
+            HeroKnight heroKnight = collision.GetComponent<HeroKnight>();
+            if (heroKnight != null)
+            {
+		    isColliding = true;
+		    StartCoroutine(ReactivateCollider(1f));
+                heroKnight.Damage();
+            }
         }
     }
 }

@@ -29,6 +29,7 @@ public class ChestOpen : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<HeroKnight>().keyHas)
         {
             checkPlayer = true;
+		//Debug.Log("Pegou!");
             
             other.gameObject.GetComponent<HeroKnight>().key = 
                 other.gameObject.GetComponent<HeroKnight>().key - 1;

@@ -9,6 +9,9 @@ public class PauseMenu : MonoBehaviour
 
     public Transform pauseMenu;
 
+    public AudioSource audioSource;
+    public AudioClip buttonAudio;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,12 +38,14 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
+        OnClickButton();
         pauseMenu.gameObject.SetActive(false);
         Time.timeScale = 1f;
     }
 
     public void ExitGame()
     {
+        OnClickButton();
         //Application.Quit(); trocar para essa chamada antes de buildar o jogo
         Time.timeScale = 1; // Despausa o jogo
         #if UNITY_EDITOR
@@ -52,6 +57,12 @@ public class PauseMenu : MonoBehaviour
 
     public void RestartGame(string scene)
     {
+        OnClickButton();
         SceneManager.LoadScene(scene);
+    }
+
+    public void OnClickButton()
+    {
+        audioSource.PlayOneShot(buttonAudio);
     }
 }
