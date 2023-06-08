@@ -55,6 +55,7 @@ public class HeroKnight : MonoBehaviour
     public int key;
     public bool heartCollected = false;
     private bool isItRolling = false;
+    public AudioSource swordAttackSound;
 
     // Use this for initialization
     void Start()
@@ -71,7 +72,7 @@ public class HeroKnight : MonoBehaviour
         key = 0;
         keyHas = false;
         heartHas = false;
-	  this.movementDirection = MovementDirection.Right;
+	this.movementDirection = MovementDirection.Right;
     }
 
     // Update is called once per frame
@@ -158,6 +159,7 @@ public class HeroKnight : MonoBehaviour
         else if (Input.GetMouseButtonDown(0) && m_timeSinceAttack > 0.25f && !m_rolling && !isDeath)
         {
             m_currentAttack++;
+            swordAttackSound.Play();
 
             // Loop back to one after third attack
             if (m_currentAttack > 3)

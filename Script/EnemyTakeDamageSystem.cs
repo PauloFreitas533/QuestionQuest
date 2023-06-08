@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 using UnityEngine;
 
 public class EnemyTakeDamageSystem : MonoBehaviour
@@ -11,11 +12,14 @@ public class EnemyTakeDamageSystem : MonoBehaviour
     private EnemyLifeBar enemyLifeBar;
 
     private bool isColliding = false;
+    private Animator deathSpriteAnimator;
+    public AudioSource enemyDeathSound;
 
     private void Start()
     {
         this.enemyLifeBar.MaxLife = this.life--;
         this.enemyLifeBar.Life = this.life--;
+	deathSpriteAnimator = GetComponent<Animator>();
     }
 
     public void TakeDamage(int damage)
@@ -35,8 +39,9 @@ public class EnemyTakeDamageSystem : MonoBehaviour
 
     private void Die()
     {
-        // Lógica para a morte do inimigo, como destruir o objeto ou reproduzir uma animação
-        Destroy(gameObject);
+        deathSpriteAnimator.SetTrigger("Die"); // Trigger the death animation
+	enemyDeathSound.Play();
+        Destroy(gameObject, 1.0f);
     }
 
     private IEnumerator ReactivateCollider(float delay)
