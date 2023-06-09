@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogGhost : MonoBehaviour
+public class Question6 : MonoBehaviour
 {
     public Sprite profile;
     public string speakTxt;
@@ -30,14 +30,15 @@ public class DialogGhost : MonoBehaviour
 
     private void FixedUpdate()
     {
-         Interact();
+        Interact();
     }
 
     private void Update()
     {
         if (onRadious)
         {
-            dc.Speak(profile, speakTxt, actorName, answerText1, answerText2, answerText3, answerText4, correctAnswer, "ghost");
+            DialogControl dialogControl = FindObjectOfType<DialogControl>();
+            dc.Speak(profile, speakTxt, actorName, answerText1, answerText2, answerText3, answerText4, correctAnswer, "question6");
             onRadious = false;
         }
     }

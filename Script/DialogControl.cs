@@ -6,8 +6,12 @@ using UnityEngine.UI;
 public class DialogControl : MonoBehaviour
 {
     private HeroKnight hero;
-    private DialogGhost dialogGhost;
+    private Question1 question1;
     private Question2 question2;
+    private Question3 question3;
+    private Question4 question4;
+    private Question5 question5;
+    private Question6 question6;
     public Button[] index = new Button[4];
 
     [Header("Components")]
@@ -23,8 +27,6 @@ public class DialogControl : MonoBehaviour
 
     [Header("Settings")]
     public float typingSpeed;
-    //private string sentences;
-    //private int index;
 
     public void SetHero(HeroKnight heroInstance)
     {
@@ -34,13 +36,19 @@ public class DialogControl : MonoBehaviour
     void Awake()
     {
         hero = FindObjectOfType<HeroKnight>();
-        dialogGhost = FindObjectOfType<DialogGhost>();
+        question1 = FindObjectOfType<Question1>();
         question2 = FindObjectOfType<Question2>();
+        question3 = FindObjectOfType<Question3>();
+        question4 = FindObjectOfType<Question4>();
+        question5 = FindObjectOfType<Question5>();
+        question6 = FindObjectOfType<Question6>();
     }
 
     public void Speak(Sprite p, string txt, string actorName, string answer1, 
         string answer2, string answer3, string answer4, int correctIntAnswer, string dialogOption)
     {
+        if (dialogOption == "question1" && question1 != null)
+        {
         dialogObj.SetActive(true);
         profile.sprite = p;
         speakText.text = txt;
@@ -51,6 +59,72 @@ public class DialogControl : MonoBehaviour
         answerText4.text = answer4;
         correctAnswer = correctIntAnswer;
         ShowDialog(dialogOption);
+        }
+        else if (dialogOption == "question2" && question2 != null)
+        {
+            dialogObj.SetActive(true);
+            profile.sprite = p;
+            speakText.text = txt;
+            actorNameText.text = actorName;
+            answerText1.text = answer1;
+            answerText2.text = answer2;
+            answerText3.text = answer3;
+            answerText4.text = answer4;
+            correctAnswer = correctIntAnswer;
+            ShowDialog(dialogOption);
+        }
+	else if (dialogOption == "question3" && question3 != null)
+        {
+            dialogObj.SetActive(true);
+            profile.sprite = p;
+            speakText.text = txt;
+            actorNameText.text = actorName;
+            answerText1.text = answer1;
+            answerText2.text = answer2;
+            answerText3.text = answer3;
+            answerText4.text = answer4;
+            correctAnswer = correctIntAnswer;
+            ShowDialog(dialogOption);
+        }
+	else if (dialogOption == "question4" && question4 != null)
+        {
+            dialogObj.SetActive(true);
+            profile.sprite = p;
+            speakText.text = txt;
+            actorNameText.text = actorName;
+            answerText1.text = answer1;
+            answerText2.text = answer2;
+            answerText3.text = answer3;
+            answerText4.text = answer4;
+            correctAnswer = correctIntAnswer;
+            ShowDialog(dialogOption);
+        }
+	else if (dialogOption == "question5" && question5 != null)
+        {
+            dialogObj.SetActive(true);
+            profile.sprite = p;
+            speakText.text = txt;
+            actorNameText.text = actorName;
+            answerText1.text = answer1;
+            answerText2.text = answer2;
+            answerText3.text = answer3;
+            answerText4.text = answer4;
+            correctAnswer = correctIntAnswer;
+            ShowDialog(dialogOption);
+        }
+	else if (dialogOption == "question6" && question6 != null)
+        {
+            dialogObj.SetActive(true);
+            profile.sprite = p;
+            speakText.text = txt;
+            actorNameText.text = actorName;
+            answerText1.text = answer1;
+            answerText2.text = answer2;
+            answerText3.text = answer3;
+            answerText4.text = answer4;
+            correctAnswer = correctIntAnswer;
+            ShowDialog(dialogOption);
+        }
     }
 
     public void Escape()
@@ -76,15 +150,30 @@ public class DialogControl : MonoBehaviour
     {
         if (buttonIndex == correctAnswer)
         {
-            if (dialogOption == "ghost")
+            if (dialogOption == "question1")
             {
-                dialogGhost.gameObject.SetActive(false);
+                question1.gameObject.SetActive(false);
             }
             else if (dialogOption == "question2")
             {
                 question2.gameObject.SetActive(false);
             }
-            // Handle other dialog options here
+            else if (dialogOption == "question3")
+            {
+                question3.gameObject.SetActive(false);
+            }
+            else if (dialogOption == "question4")
+            {
+                question4.gameObject.SetActive(false);
+            }
+            else if (dialogOption == "question5")
+            {
+                question5.gameObject.SetActive(false);
+            }
+            else if (dialogOption == "question6")
+            {
+                question6.gameObject.SetActive(false);
+            }
         }
         else
         {
