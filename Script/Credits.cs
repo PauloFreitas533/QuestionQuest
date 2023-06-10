@@ -74,7 +74,6 @@ public class Credits : MonoBehaviour
         #endif
     }
 
-
     public void OnClickButton()
     {
         audioSource.PlayOneShot(buttonAudio);

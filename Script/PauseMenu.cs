@@ -43,15 +43,33 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void StartGame()
+    {
+        Destroy(FindObjectOfType<Question1>());
+        Destroy(FindObjectOfType<Question2>());
+        Destroy(FindObjectOfType<Question3>());
+        Destroy(FindObjectOfType<Question4>());
+        Destroy(FindObjectOfType<Question5>());
+        OnClickButton();
+        pauseMenu.gameObject.SetActive(false);
+        Time.timeScale = 1f;
+    }
+
     public void ExitGame()
     {
         OnClickButton();
         //Application.Quit(); trocar para essa chamada antes de buildar o jogo
         Time.timeScale = 1; // Despausa o jogo
+        Invoke("ExitScene", 0.5f);
+    }
+
+    public void ExitScene()
+    {
+        //Application.Quit(); trocar para essa chamada antes de buildar o jogo
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
         #else
-            Process.GetCurrentProcess().Kill(); // Encerra o processo do jogo
+        Process.GetCurrentProcess().Kill(); // Encerra o processo do jogo
         #endif
     }
 
