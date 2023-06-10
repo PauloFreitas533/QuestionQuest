@@ -9,34 +9,41 @@ public class Menu : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip buttonAudio;
 
-    private float delayBeforeExit = 1f;
-
-    public void StartGame(string scene)
+    public void StartGame()
     {
+        Destroy(FindObjectOfType<Question1>());
+        Destroy(FindObjectOfType<Question2>());
+        Destroy(FindObjectOfType<Question3>());
+        Destroy(FindObjectOfType<Question4>());
+        Destroy(FindObjectOfType<Question5>());
+        Time.timeScale = 1;
         OnClickButton();
-        SceneManager.LoadScene(scene);
+        Invoke("LoadNewGameScene", 0.5f);
+    }
+
+    public void LoadNewGameScene()
+    {
+        SceneManager.LoadScene(1);
     }
 
     public void ExitGame()
     {
-        StartCoroutine(ExitWithDelay());
+        OnClickButton();
+        //Application.Quit(); trocar para essa chamada antes de buildar o jogo
+        Time.timeScale = 1; // Despausa o jogo
+        Invoke("ExitScene", 0.5f);
     }
 
-    private IEnumerator ExitWithDelay()
+    public void ExitScene()
     {
-        OnClickButton();
-        yield return new WaitForSeconds(delayBeforeExit);
-
-        // Application.Quit();
-        // Restante das linhas do código após o atraso
-        Time.timeScale = 1; // Despausa o jogo
-
+        //Application.Quit(); trocar para essa chamada antes de buildar o jogo
         #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
         #else
-        Process.GetCurrentProcess().Kill();
+        Process.GetCurrentProcess().Kill(); // Encerra o processo do jogo
         #endif
     }
+
 
     public void OnClickButton()
     {

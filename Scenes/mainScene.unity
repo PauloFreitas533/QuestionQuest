@@ -2079,7 +2079,7 @@ MonoBehaviour:
   correctAnswer: 1
   playerLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 72
   radious: 1.03
 --- !u!1 &661114835
 GameObject:
@@ -2492,7 +2492,6 @@ GameObject:
   - component: {fileID: 710277095}
   - component: {fileID: 710277097}
   - component: {fileID: 710277096}
-  - component: {fileID: 710277098}
   m_Layer: 5
   m_Name: Dialog
   m_TagString: Untagged
@@ -2566,33 +2565,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710277094}
   m_CullTransparentMesh: 1
---- !u!114 &710277098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 710277094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ebee11dab0bfea4a98dc79cba75613e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  index:
-  - {fileID: 1941571840}
-  - {fileID: 1073542270}
-  - {fileID: 271158153}
-  - {fileID: 674716009}
-  dialogObj: {fileID: 710277094}
-  profile: {fileID: 0}
-  speakText: {fileID: 0}
-  actorNameText: {fileID: 0}
-  answerText1: {fileID: 210415635}
-  answerText2: {fileID: 1612397771}
-  answerText3: {fileID: 1578278829}
-  answerText4: {fileID: 1380303779}
-  correctAnswer: 0
-  typingSpeed: 0
 --- !u!50 &734161597 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 3291261390210507018, guid: 26668dbeb9ebcb04785455d18eb16688, type: 3}
@@ -2957,7 +2929,7 @@ GameObject:
   - component: {fileID: 938620062}
   m_Layer: 0
   m_Name: Question1
-  m_TagString: enimyGhost1
+  m_TagString: question1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3024,7 +2996,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6323719953710832613, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6323719953710832613, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: m_IsActive
@@ -3504,7 +3476,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1053351486}
   - component: {fileID: 1053351485}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CM vcam1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35464,7 +35436,7 @@ GameObject:
   - component: {fileID: 1290223809}
   - component: {fileID: 1290223811}
   - component: {fileID: 1290223812}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35691,7 +35663,7 @@ MonoBehaviour:
   correctAnswer: 2
   playerLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 72
   radious: 1.03
 --- !u!1 &1363921530
 GameObject:
@@ -37644,7 +37616,7 @@ MonoBehaviour:
   correctAnswer: 1
   playerLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 72
   radious: 1.03
 --- !u!1 &1679198852
 GameObject:
@@ -37949,7 +37921,7 @@ MonoBehaviour:
   correctAnswer: 2
   playerLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 72
   radious: 1.03
 --- !u!1 &1804396098
 GameObject:

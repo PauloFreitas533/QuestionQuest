@@ -292,7 +292,7 @@ MonoBehaviour:
   buttons:
   - {fileID: 6906746026969279967}
   - {fileID: 4110943942681205946}
-  delay: 152
+  delay: 150
   audioSource: {fileID: 512860020}
   buttonAudio: {fileID: 8300000, guid: d78c77ae04c3ee84799106d48fa71299, type: 3}
 --- !u!82 &512860020
@@ -777,7 +777,7 @@ MonoBehaviour:
     Freitas, Wallas Souza, Wemerson Walcley.\r\nQualquer viola\xE7\xE3o dos direitos
     autorais ou outros direitos de propriedade intelectual relacionados a este jogo
     resultar\xE1 em medidas legais apropriadas.\r\n\r\nEste jogo \xE9 fornecido \"como
-    est\xE1\" sem garantias expressas ou impl\xEDcitas. Paulo Freitas,Wallas Souza,
+    est\xE1\" sem garantias expressas ou impl\xEDcitas. Paulo Freitas, Wallas Souza,
     Wemerson Walcley n\xE3o assumem nenhuma responsabilidade por quaisquer danos
     diretos, indiretos, incidentes, consequenciais ou especiais que possam surgir
     do uso deste jogo.\r\n\r\nTodas as marcas comerciais, marcas de servi\xE7o e
@@ -983,6 +983,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1323724859676451833, guid: f4015638707fe584ea43bf1dd238f03c, type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.4433962
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323724859676451833, guid: f4015638707fe584ea43bf1dd238f03c, type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.4433962
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323724859676451833, guid: f4015638707fe584ea43bf1dd238f03c, type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.4433962
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323724859676451833, guid: f4015638707fe584ea43bf1dd238f03c, type: 3}
       propertyPath: m_Colors.m_DisabledColor.a
       value: 0
       objectReference: {fileID: 0}
@@ -1148,6 +1160,18 @@ PrefabInstance:
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3397721476617041430, guid: 62c89f19bbe4237489fe82a6e7e9e2dd, type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.4433962
+      objectReference: {fileID: 0}
+    - target: {fileID: 3397721476617041430, guid: 62c89f19bbe4237489fe82a6e7e9e2dd, type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.4433962
+      objectReference: {fileID: 0}
+    - target: {fileID: 3397721476617041430, guid: 62c89f19bbe4237489fe82a6e7e9e2dd, type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.4433962
+      objectReference: {fileID: 0}
+    - target: {fileID: 3397721476617041430, guid: 62c89f19bbe4237489fe82a6e7e9e2dd, type: 3}
       propertyPath: m_Colors.m_DisabledColor.a
       value: 0
       objectReference: {fileID: 0}
@@ -1164,12 +1188,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3397721476617041430, guid: 62c89f19bbe4237489fe82a6e7e9e2dd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3397721476617041430, guid: 62c89f19bbe4237489fe82a6e7e9e2dd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 512860019}
     - target: {fileID: 3397721476617041430, guid: 62c89f19bbe4237489fe82a6e7e9e2dd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RestartGame
+      value: StartGame
       objectReference: {fileID: 0}
     - target: {fileID: 3397721476617041430, guid: 62c89f19bbe4237489fe82a6e7e9e2dd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

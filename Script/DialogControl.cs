@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -47,6 +48,8 @@ public class DialogControl : MonoBehaviour
     public void Speak(Sprite p, string txt, string actorName, string answer1, 
         string answer2, string answer3, string answer4, int correctIntAnswer, string dialogOption)
     {
+        Time.timeScale = 0f;
+
         if (dialogOption == "question1" && question1 != null)
         {
         dialogObj.SetActive(true);
@@ -150,27 +153,27 @@ public class DialogControl : MonoBehaviour
     {
         if (buttonIndex == correctAnswer)
         {
-            if (dialogOption == "question1")
+            if (dialogOption == "question1" && question1 != null)
             {
                 question1.gameObject.SetActive(false);
             }
-            else if (dialogOption == "question2")
+            else if (dialogOption == "question2" && question2 != null)
             {
                 question2.gameObject.SetActive(false);
             }
-            else if (dialogOption == "question3")
+            else if (dialogOption == "question3" && question3 != null)
             {
                 question3.gameObject.SetActive(false);
             }
-            else if (dialogOption == "question4")
+            else if (dialogOption == "question4" && question4 != null)
             {
                 question4.gameObject.SetActive(false);
             }
-            else if (dialogOption == "question5")
+            else if (dialogOption == "question5" && question5 != null)
             {
                 question5.gameObject.SetActive(false);
             }
-            else if (dialogOption == "question6")
+            else if (dialogOption == "question6" && question6 != null)
             {
                 question6.gameObject.SetActive(false);
             }
@@ -178,8 +181,18 @@ public class DialogControl : MonoBehaviour
         else
         {
             hero.Damage();
+            if (hero.life <= 0)
+            {
+                Time.timeScale = 1f;
+                Invoke("LoadGameOverScene", 2.0f);
+            }
         }
         dialogObj.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    private void LoadGameOverScene()
+    {
+        SceneManager.LoadScene(2);
     }
 }

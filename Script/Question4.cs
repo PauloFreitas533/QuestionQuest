@@ -68,7 +68,7 @@ public class Question4 : MonoBehaviour
     private IEnumerator RestoreRadious()
     {
         isCoroutineRunning = true;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
         radious = originalRadious;
         isCoroutineRunning = false;
