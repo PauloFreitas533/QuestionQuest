@@ -26,6 +26,7 @@ public class Question1 : MonoBehaviour
     {
         originalRadious = radious;
         dc = FindObjectOfType<DialogControl>();
+        onRadious = false;
     }
 
     private void FixedUpdate()
@@ -37,7 +38,7 @@ public class Question1 : MonoBehaviour
     {
         if (onRadious)
         {
-            dc.Speak(profile, speakTxt, actorName, answerText1, answerText2, answerText3, answerText4, correctAnswer, "question1");
+            dc.Speak(profile, speakTxt, actorName, answerText1, answerText2, answerText3, answerText4, correctAnswer, "question1", GetOnRadious());
             onRadious = false;
         }
     }
@@ -77,4 +78,10 @@ public class Question1 : MonoBehaviour
     {
         Gizmos.DrawWireSphere(transform.position, radious);
     }
+
+    public bool GetOnRadious()
+    {
+        return onRadious;
+    }
+
 }

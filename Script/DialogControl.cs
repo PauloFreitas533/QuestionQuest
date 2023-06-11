@@ -46,11 +46,13 @@ public class DialogControl : MonoBehaviour
     }
 
     public void Speak(Sprite p, string txt, string actorName, string answer1, 
-        string answer2, string answer3, string answer4, int correctIntAnswer, string dialogOption)
+        string answer2, string answer3, string answer4, int correctIntAnswer, string dialogOption, bool onRadious)
     {
+        if (onRadious)
+        {
         Time.timeScale = 0f;
 
-        if (dialogOption == "question1" && question1 != null)
+        if (dialogOption != null)
         {
         dialogObj.SetActive(true);
         profile.sprite = p;
@@ -63,70 +65,6 @@ public class DialogControl : MonoBehaviour
         correctAnswer = correctIntAnswer;
         ShowDialog(dialogOption);
         }
-        else if (dialogOption == "question2" && question2 != null)
-        {
-            dialogObj.SetActive(true);
-            profile.sprite = p;
-            speakText.text = txt;
-            actorNameText.text = actorName;
-            answerText1.text = answer1;
-            answerText2.text = answer2;
-            answerText3.text = answer3;
-            answerText4.text = answer4;
-            correctAnswer = correctIntAnswer;
-            ShowDialog(dialogOption);
-        }
-	else if (dialogOption == "question3" && question3 != null)
-        {
-            dialogObj.SetActive(true);
-            profile.sprite = p;
-            speakText.text = txt;
-            actorNameText.text = actorName;
-            answerText1.text = answer1;
-            answerText2.text = answer2;
-            answerText3.text = answer3;
-            answerText4.text = answer4;
-            correctAnswer = correctIntAnswer;
-            ShowDialog(dialogOption);
-        }
-	else if (dialogOption == "question4" && question4 != null)
-        {
-            dialogObj.SetActive(true);
-            profile.sprite = p;
-            speakText.text = txt;
-            actorNameText.text = actorName;
-            answerText1.text = answer1;
-            answerText2.text = answer2;
-            answerText3.text = answer3;
-            answerText4.text = answer4;
-            correctAnswer = correctIntAnswer;
-            ShowDialog(dialogOption);
-        }
-	else if (dialogOption == "question5" && question5 != null)
-        {
-            dialogObj.SetActive(true);
-            profile.sprite = p;
-            speakText.text = txt;
-            actorNameText.text = actorName;
-            answerText1.text = answer1;
-            answerText2.text = answer2;
-            answerText3.text = answer3;
-            answerText4.text = answer4;
-            correctAnswer = correctIntAnswer;
-            ShowDialog(dialogOption);
-        }
-	else if (dialogOption == "question6" && question6 != null)
-        {
-            dialogObj.SetActive(true);
-            profile.sprite = p;
-            speakText.text = txt;
-            actorNameText.text = actorName;
-            answerText1.text = answer1;
-            answerText2.text = answer2;
-            answerText3.text = answer3;
-            answerText4.text = answer4;
-            correctAnswer = correctIntAnswer;
-            ShowDialog(dialogOption);
         }
     }
 
