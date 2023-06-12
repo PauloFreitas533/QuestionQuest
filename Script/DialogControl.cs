@@ -14,6 +14,7 @@ public class DialogControl : MonoBehaviour
     private Question5 question5;
     private Question6 question6;
     public Button[] index = new Button[4];
+    private bool heroIsDeath = false;
 
     [Header("Components")]
     public GameObject dialogObj;
@@ -121,16 +122,20 @@ public class DialogControl : MonoBehaviour
             hero.Damage();
             if (hero.life <= 0)
             {
-                Time.timeScale = 1f;
-                Invoke("LoadGameOverScene", 2.0f);
+                SetHeroIsDeath(true);
             }
         }
         dialogObj.SetActive(false);
         Time.timeScale = 1f;
     }
 
-    private void LoadGameOverScene()
+    public bool GetHeroIsDeath()
     {
-        SceneManager.LoadScene(2);
+        return heroIsDeath;
+    }
+
+    public void SetHeroIsDeath(bool value)
+    {
+        heroIsDeath = value;
     }
 }

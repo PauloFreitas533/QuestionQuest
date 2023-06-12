@@ -47,12 +47,11 @@ public class Question1 : MonoBehaviour
     {
         Collider2D hit = Physics2D.OverlapCircle(transform.position, radious, playerLayer);
 
-        if (hit != null)
+        if (hit != null && !dc.GetHeroIsDeath())
         {
             onRadious = true;
             radious = 0;
             Time.timeScale = 0f;
-
             if (!isCoroutineRunning)
             {
                 StartCoroutine(RestoreRadious());
@@ -68,7 +67,7 @@ public class Question1 : MonoBehaviour
     private IEnumerator RestoreRadious()
     {
         isCoroutineRunning = true;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
         radious = originalRadious;
         isCoroutineRunning = false;
