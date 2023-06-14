@@ -55,6 +55,7 @@ public class DialogControl : MonoBehaviour
 
         if (dialogOption != null)
         {
+	Cursor.visible = true;
         dialogObj.SetActive(true);
         profile.sprite = p;
         speakText.text = txt;
@@ -92,6 +93,7 @@ public class DialogControl : MonoBehaviour
     {
         if (buttonIndex == correctAnswer)
         {
+	    Cursor.visible = false;
             if (dialogOption == "question1" && question1 != null)
             {
                 question1.gameObject.SetActive(false);

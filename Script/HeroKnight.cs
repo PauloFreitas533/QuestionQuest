@@ -73,6 +73,7 @@ public class HeroKnight : MonoBehaviour
         keyHas = false;
         heartHas = false;
 	this.movementDirection = MovementDirection.Right;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -139,24 +140,8 @@ public class HeroKnight : MonoBehaviour
         //Set AirSpeed in animator
         m_animator.SetFloat("AirSpeedY", m_body2d.velocity.y);
 
-        // -- Handle Animations --
-        //Wall Slide
-        //m_isWallSliding = (m_wallSensorR1.State() && m_wallSensorR2.State()) || (m_wallSensorL1.State() && m_wallSensorL2.State());
-        //m_animator.SetBool("WallSlide", m_isWallSliding);
-
-        //Death
-        if (Input.GetKeyDown("e") && !m_rolling)
-        {
-            m_animator.SetBool("noBlood", m_noBlood);
-            m_animator.SetTrigger("Death");
-        }
-
-        //Hurt
-        else if (Input.GetKeyDown("q") && !m_rolling)
-            m_animator.SetTrigger("Hurt");
-
         //Attack
-        else if (Input.GetMouseButtonDown(0) && m_timeSinceAttack > 0.25f && !m_rolling && !isDeath)
+        if (Input.GetMouseButtonDown(0) && m_timeSinceAttack > 0.25f && !m_rolling && !isDeath)
         {
             m_currentAttack++;
             swordAttackSound.Play();
@@ -176,23 +161,12 @@ public class HeroKnight : MonoBehaviour
             m_timeSinceAttack = 0.0f;
         }
 
-        // Block
-        else if (Input.GetMouseButtonDown(1) && !m_rolling && !isDeath)
-        {
-            m_animator.SetTrigger("Block");
-            m_animator.SetBool("IdleBlock", true);
-        }
-
-        else if (Input.GetMouseButtonUp(1))
-            m_animator.SetBool("IdleBlock", false);
-
         // Roll
-        else if (Input.GetKeyDown(KeyCode.LeftShift) && !m_rolling && !m_isWallSliding && !isDeath && !isItRolling)
+        else if (Input.GetKeyDown(KeyCode.LeftAlt) && !m_rolling && !m_isWallSliding && !isDeath && !isItRolling)
 	  {
   		isItRolling = true;
     	      StartCoroutine(RollForDuration(0.6f));
 	  }
-
 
         //Jump
         else if (Input.GetKeyDown("space") && m_grounded && !m_rolling && !isDeath)
@@ -378,6 +352,7 @@ private IEnumerator RollForDuration(float duration)
 
     private void LoadGameOverScene()
     {
+	Cursor.visible = true;
         SceneManager.LoadScene(2);
     }
 }

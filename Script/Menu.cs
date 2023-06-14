@@ -24,24 +24,19 @@ public class Menu : MonoBehaviour
     public void LoadNewGameScene()
     {
         SceneManager.LoadScene(1);
+	Cursor.visible = false;
     }
 
     public void ExitGame()
     {
         OnClickButton();
-        //Application.Quit(); trocar para essa chamada antes de buildar o jogo
         Time.timeScale = 1; // Despausa o jogo
         Invoke("ExitScene", 0.5f);
     }
 
     public void ExitScene()
     {
-        //Application.Quit(); trocar para essa chamada antes de buildar o jogo
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
-        Process.GetCurrentProcess().Kill(); // Encerra o processo do jogo
-        #endif
+        Application.Quit();
     }
 
 

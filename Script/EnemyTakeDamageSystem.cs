@@ -17,8 +17,6 @@ public class EnemyTakeDamageSystem : MonoBehaviour
 
     private void Start()
     {
-        this.enemyLifeBar.MaxLife = this.life--;
-        this.enemyLifeBar.Life = this.life--;
 	deathSpriteAnimator = GetComponent<Animator>();
     }
 
@@ -29,7 +27,7 @@ public class EnemyTakeDamageSystem : MonoBehaviour
             this.life -= damage;
         }
 
-        this.enemyLifeBar.Life = this.life--;
+        this.enemyLifeBar.Life = this.life;
 
         if (this.life <= 0)
         {
@@ -39,9 +37,9 @@ public class EnemyTakeDamageSystem : MonoBehaviour
 
     private void Die()
     {
-        deathSpriteAnimator.SetTrigger("Die"); // Trigger the death animation
-	enemyDeathSound.Play();
-        Destroy(gameObject, 1.0f);
+        //deathSpriteAnimator.SetTrigger("Die"); // Trigger the death animation
+	//enemyDeathSound.Play();
+        Destroy(gameObject);
     }
 
     private IEnumerator ReactivateCollider(float delay)

@@ -292,7 +292,7 @@ MonoBehaviour:
   buttons:
   - {fileID: 6906746026969279967}
   - {fileID: 4110943942681205946}
-  delay: 150
+  delay: 160
   audioSource: {fileID: 512860020}
   buttonAudio: {fileID: 8300000, guid: d78c77ae04c3ee84799106d48fa71299, type: 3}
 --- !u!82 &512860020
@@ -718,8 +718,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 154.4151, y: -900.4865}
-  m_SizeDelta: {x: 800, y: 4622.0605}
+  m_AnchoredPosition: {x: 154.4151, y: -1072.7917}
+  m_SizeDelta: {x: 800, y: 5222.6885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1726194602
 MonoBehaviour:

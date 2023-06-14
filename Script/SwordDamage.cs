@@ -129,16 +129,24 @@ public class SwordDamage : MonoBehaviour
             attackCollider = this.leftAttackCollider;
         }
 
-        Collider2D[] hitColliders = Physics2D.OverlapBoxAll(attackPoint.position, attackCollider.size, 0f);
-        foreach (Collider2D enemyCollider in hitColliders)
-        {
-            EnemyTakeDamageSystem enemy = enemyCollider.GetComponent<EnemyTakeDamageSystem>();
-            if (enemy != null)
-            {
-		swordSound.Play();
-                enemy.TakeDamage(damage);
-            }
-        }
+Collider2D[] hitColliders = Physics2D.OverlapBoxAll(attackPoint.position, attackCollider.size, 0f);
+foreach (Collider2D enemyCollider in hitColliders)
+{
+    EnemyTakeDamageSystem enemy = enemyCollider.GetComponent<EnemyTakeDamageSystem>();
+    BossTakeDamageSystem boss = enemyCollider.GetComponent<BossTakeDamageSystem>();
+    
+    if (enemy != null)
+    {
+        swordSound.Play();
+        enemy.TakeDamage(damage);
+    }
+    else if (boss != null)
+    {
+        swordSound.Play();
+        boss.TakeDamage(damage);
+    }
+}
+
     }
 
     private void ResetAttack()

@@ -27,11 +27,13 @@ public class PauseMenu : MonoBehaviour
             {
                 pauseMenu.gameObject.SetActive(false);
                 Time.timeScale = 1f;
+		Cursor.visible = false;
             }
             else
             {
                 pauseMenu.gameObject.SetActive(true);
                 Time.timeScale = 0f;
+	        Cursor.visible = true;
             }
         }
     }
@@ -39,6 +41,7 @@ public class PauseMenu : MonoBehaviour
     public void ResumeGame()
     {
         OnClickButton();
+	Cursor.visible = false;
         pauseMenu.gameObject.SetActive(false);
         Time.timeScale = 1f;
     }
@@ -58,19 +61,13 @@ public class PauseMenu : MonoBehaviour
     public void ExitGame()
     {
         OnClickButton();
-        //Application.Quit(); trocar para essa chamada antes de buildar o jogo
         Time.timeScale = 1; // Despausa o jogo
         Invoke("ExitScene", 0.5f);
     }
 
     public void ExitScene()
     {
-        //Application.Quit(); trocar para essa chamada antes de buildar o jogo
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
-        Process.GetCurrentProcess().Kill(); // Encerra o processo do jogo
-        #endif
+        Application.Quit();
     }
 
     public void OnClickButton()
