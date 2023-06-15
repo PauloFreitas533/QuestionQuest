@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogControl : MonoBehaviour
 {
     private HeroKnight hero;
-    public DialogGhost dialogGhost;
+    private Question1 question1;
+    private Question2 question2;
+    private Question3 question3;
+    private Question4 question4;
+    private Question5 question5;
+    private Question6 question6;
     public Button[] index = new Button[4];
+    private bool heroIsDeath = false;
 
     [Header("Components")]
     public GameObject dialogObj;
@@ -22,8 +29,6 @@ public class DialogControl : MonoBehaviour
 
     [Header("Settings")]
     public float typingSpeed;
-    //private string sentences;
-    //private int index;
 
     public void SetHero(HeroKnight heroInstance)
     {
@@ -33,12 +38,24 @@ public class DialogControl : MonoBehaviour
     void Awake()
     {
         hero = FindObjectOfType<HeroKnight>();
-        dialogGhost = FindObjectOfType<DialogGhost>();
+        question1 = FindObjectOfType<Question1>();
+        question2 = FindObjectOfType<Question2>();
+        question3 = FindObjectOfType<Question3>();
+        question4 = FindObjectOfType<Question4>();
+        question5 = FindObjectOfType<Question5>();
+        question6 = FindObjectOfType<Question6>();
     }
 
     public void Speak(Sprite p, string txt, string actorName, string answer1, 
-        string answer2, string answer3, string answer4, int correctIntAnswer)
+        string answer2, string answer3, string answer4, int correctIntAnswer, string dialogOption, bool onRadious)
     {
+        if (onRadious)
+        {
+        Time.timeScale = 0f;
+
+        if (dialogOption != null)
+        {
+	Cursor.visible = true;
         dialogObj.SetActive(true);
         profile.sprite = p;
         speakText.text = txt;
@@ -48,37 +65,10 @@ public class DialogControl : MonoBehaviour
         answerText3.text = answer3;
         answerText4.text = answer4;
         correctAnswer = correctIntAnswer;
-        ShowDialog();
-        //StartCoroutine(TypeSentence());
+        ShowDialog(dialogOption);
+        }
+        }
     }
-
-    //IEnumerator TypeSentence()
-    //{
-    //    foreach (char letter in sentences[index].ToCharArray())
-    //    {
-    //        speakText.text += letter;
-    //        yield return new WaitForSeconds(typingSpeed);
-    //    }
-    //}
-
-    //public void NextSentence()
-    //{
-    //    if(speakText.text == sentences[index])
-    //    {
-    //        if(index < sentences.Length - 1)
-    //        {
-    //            index++;
-    //            speakText.text = "";
-    //            StartCoroutine(TypeSentence());
-    //        }
-    //        else
-    //        {
-    //            speakText.text = "";
-    //            index = 0;
-    //            dialogObj.SetActive(false);
-    //        }
-    //    }
-    //}
 
     public void Escape()
     {
@@ -86,30 +76,68 @@ public class DialogControl : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void ShowDialog()
+    public void ShowDialog(string dialogOption)
     {
         index[0].onClick.RemoveAllListeners();
         index[1].onClick.RemoveAllListeners();
         index[2].onClick.RemoveAllListeners();
         index[3].onClick.RemoveAllListeners();
 
-        index[0].onClick.AddListener(() => AnswerButton(0));
-        index[1].onClick.AddListener(() => AnswerButton(1));
-        index[2].onClick.AddListener(() => AnswerButton(2));
-        index[3].onClick.AddListener(() => AnswerButton(3));
+        index[0].onClick.AddListener(() => AnswerButton(0, dialogOption));
+        index[1].onClick.AddListener(() => AnswerButton(1, dialogOption));
+        index[2].onClick.AddListener(() => AnswerButton(2, dialogOption));
+        index[3].onClick.AddListener(() => AnswerButton(3, dialogOption));
     }
 
-    public void AnswerButton(int buttonIndex)
+    public void AnswerButton(int buttonIndex, string dialogOption)
     {
         if (buttonIndex == correctAnswer)
         {
-            dialogGhost.gameObject.SetActive(false);
+	    Cursor.visible = false;
+            if (dialogOption == "question1" && question1 != null)
+            {
+                question1.gameObject.SetActive(false);
+            }
+            else if (dialogOption == "question2" && question2 != null)
+            {
+                question2.gameObject.SetActive(false);
+            }
+            else if (dialogOption == "question3" && question3 != null)
+            {
+                question3.gameObject.SetActive(false);
+            }
+            else if (dialogOption == "question4" && question4 != null)
+            {
+                question4.gameObject.SetActive(false);
+            }
+            else if (dialogOption == "question5" && question5 != null)
+            {
+                question5.gameObject.SetActive(false);
+            }
+            else if (dialogOption == "question6" && question6 != null)
+            {
+                question6.gameObject.SetActive(false);
+            }
         }
         else
         {
             hero.Damage();
+            if (hero.life <= 0)
+            {
+                SetHeroIsDeath(true);
+            }
         }
         dialogObj.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    public bool GetHeroIsDeath()
+    {
+        return heroIsDeath;
+    }
+
+    public void SetHeroIsDeath(bool value)
+    {
+        heroIsDeath = value;
     }
 }
